@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class SpringJdbcTemplateExampleApplication {
@@ -18,6 +19,14 @@ public class SpringJdbcTemplateExampleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJdbcTemplateExampleApplication.class, args);
+
+		System.out.println("\n Create Course ----------------- \n");
+		Course someNewCourse = new Course(6, "Course name", "Course Description", "Course link");
+		dao.create(someNewCourse);
+
+		System.out.println("\n One Course ------------------- \n");
+		Optional<Course> course = dao.get(1);
+		System.out.println(course.get());
 
 		System.out.println("\n All courses --------------- \n");
 		List<Course> courses = dao.list();
